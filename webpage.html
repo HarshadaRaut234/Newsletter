@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Homepage</title>
+</head>
+<body style="
+  background-color: black; color: white; background-image: url('/static/space_bg.jpg'); background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div style="background-color: rgba(0, 0, 0, 0.4); padding: 40px; border-radius: 20px; text-align: center;">
+      <h1>Welcome to the homepage of The Weekly Space Gazette</h1>
+      <p style="max-width: 600px; text-align: center;  margin: 0 auto;" >
+        The Weekly Space Gazette is a short, no-fluff newsletter that brings you the latest updates on space missions, research, and discoveries — delivered every week, straight to your inbox.
+      </p>
+      <p>Enter your email to subscribe or unsubscribe:</p><br>
+
+      <form id="subscribe-form" method="post" action="/update_subscription">
+        <input type="email" name="email" placeholder="Enter your email" required 
+              style="padding: 10px; border-radius: 10px; border: none; width: 250px;" /><br><br>
+
+        <button type="submit" name="action" value="subscribe" style="background-color: #e8589b; 
+                                                                    color: white; 
+                                                                    border-radius: 20px; 
+                                                                    border: none;
+                                                                    padding: 10px 20px;
+                                                                    margin: 5px;">Subscribe</button>
+        <button type="submit" name="action" value="unsubscribe" style="background-color: #e8589b; 
+                                                                      color: aliceblue; 
+                                                                      border-radius: 20px; 
+                                                                      border: none;
+                                                                      padding: 10px 20px;
+                                                                      margin: 5px;">Unsubscribe</button>
+      </form>
+          <p id="response-message"></p>
+    </div>
+  </div>
+
+
+
+    <script>
+          const form = document.getElementById('subscribe-form');
+          const responseMessage = document.getElementById('response-message');
+          let currentAction = 'subscribe'; // default action
+
+          // Capture which button is clicked
+          form.querySelectorAll('button').forEach(button => {
+              button.addEventListener('click', () => {
+              currentAction = button.value;
+              });
+          });
+
+          form.addEventListener('submit', async (e) => {
+              e.preventDefault();
+              const formData = new FormData(form);
+              const data = {
+              email: formData.get('email'),
+              action: currentAction
+              };
+
+              const response = await fetch('/update_subscription', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(data)
+              });
+
+              const result = await response.json();
+              responseMessage.textContent = result.message;
+          });
+      </script>
+      </div>
+
+  </body>
+</html>
