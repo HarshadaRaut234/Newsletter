@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 print("Running web_scrapper.py...")
-subprocess.run([sys.executable, "web_scrapper.py"], check=True)
+subprocess.run([sys.executable, "web_scrapping.py"], check=True)
 
 print("Running insert.py...")
 subprocess.run([sys.executable, "insert.py"], check=True)
