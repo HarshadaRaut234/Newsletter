@@ -2,7 +2,7 @@ name: Weekly Newsletter
 
 on:
   schedule:
-    - cron: "*/2 * * * *"  # every 3 mins
+    - cron: "0 8 * * 0" #Every Sunday at 8AM
   workflow_dispatch:
 
 jobs:
