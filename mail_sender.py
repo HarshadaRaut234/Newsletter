@@ -36,7 +36,7 @@ with app.app_context():
 
         for receiver_email in email_list:
             msg = MIMEMultipart("alternative")
-            msg["Subject"] = "Test Space Newsletter"
+            msg["Subject"] = "Space Highlights You Don’t Want to Miss"
             msg["From"] = sender_email
             msg["To"] = receiver_email
 
